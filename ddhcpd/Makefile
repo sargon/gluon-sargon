@@ -13,7 +13,7 @@ PKG_BUILD_PARALLEL:=1
 
 TARGET_CFLAGS += -DLOG_LEVEL=20 
 
-include $(GLUONDIR)/include/package.mk
+include $(TOPDIR)/../package/gluon.mk
 
 define Package/ddhcpd
   SECTION:=net
