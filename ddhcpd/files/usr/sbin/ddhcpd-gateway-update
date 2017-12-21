@@ -1,0 +1,16 @@
+#!/bin/sh
+
+GW="$(batctl gwl | grep '=>' | cut -f 2 -d ' ')"
+GW_MAC="$(batctl tg | grep "$GW" | cut -d ' ' -f 3)"
+
+COUNT=0
+for gw_mac in "$GW_MAC" ; do
+  GW_ADDR=$(batctl dc | grep "$gw_mac" | sed -e 's/^[^0-9]*\([0-9]\+\)/\1/' | cut -d ' ' -f 1)
+  COUNT=$(expr $COUNT + 1)
+done
+
+[[ "$COUNT" -ne 1 ]] && GW_ADDR="10.116.254.254"
+
+GW_ADDR=$(echo $GW_ADDR | sed 's/\./ -p /g')
+
+/usr/sbin/ddhcpdctl -c 3 -l 4 -p ${GW_ADDR}
