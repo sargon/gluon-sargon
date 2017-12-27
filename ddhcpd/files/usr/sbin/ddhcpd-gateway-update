@@ -13,4 +13,4 @@ done
 
 GW_ADDR=$(echo $GW_ADDR | sed 's/\./,/g')
 
-/usr/sbin/ddhcpdctl -o 3;4;${GW_ADDR}
+/usr/sbin/ddhcpdctl -o "3;4;${GW_ADDR}"
