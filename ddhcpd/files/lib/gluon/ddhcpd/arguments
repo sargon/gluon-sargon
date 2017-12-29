@@ -1,0 +1,27 @@
+#!/usr/bin/lua
+local e=require"gluon.site_config"
+if e.next_node and e.next_node.ip4 then
+  io.write(" -o 3;4;" ..e.next_node.ip4 .. " -o 54;4;" ..e.next_node.ip4)
+  io.write(" -o 6;4;" ..e.next_node.ip4)
+end
+if e.prefix4 then
+  prefix=tonumber(string.gsub(e.prefix4,".*\/([0-9]+)","%1"),10)
+  io.write(" -o 1;4;")
+  for i=0,3,1 do
+    if prefix >= 8 then
+      io.write("255")
+      prefix = prefix - 8
+    elseif prefix > 0 then
+      io.write(2^(8 - prefix))
+      prefix=0
+    else
+      io.write("0")
+    end
+    if i < 3 then
+      io.write(".")
+    end
+  end
+end
+if e.ddhcpd and e.ddhcpd.range then
+  io.write(" -N " ..e.ddhcpd.range)
+end
