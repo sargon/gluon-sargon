@@ -1,8 +1,9 @@
 #!/usr/bin/lua
 local e=require"gluon.site_config"
 if e.next_node and e.next_node.ip4 then
-  io.write(" -o 3:4:" ..e.next_node.ip4 .. " -o 54:4:" ..e.next_node.ip4)
+  io.write(" -o 3:4:" ..e.next_node.ip4)
   io.write(" -o 6:4:" ..e.next_node.ip4)
+  io.write(" -o 54:4:" ..e.next_node.ip4)
 end
 if e.prefix4 then
   prefix=tonumber(string.gsub(e.prefix4,".*\/([0-9]+)","%1"),10)
