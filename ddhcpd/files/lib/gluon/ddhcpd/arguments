@@ -26,6 +26,3 @@ end
 if e.ddhcpd and e.ddhcpd.broadcast then
   io.write(" -o 28:4:" ..e.ddhcpd.broadcast)
 end
-if e.ddhcpd and e.ddhcpd.range then
-  io.write(" -N " ..e.ddhcpd.range)
-end
