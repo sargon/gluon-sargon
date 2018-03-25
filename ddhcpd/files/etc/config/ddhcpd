@@ -1,6 +1,6 @@
 config ddhcpd 'settings'
       option enabled '1'
-      option dhcp_interface 'br-client'
+      option dhcp_interface 'local-node'
       option server_interface 'br-client'
       option block_size_pow '2'
       option spare_blocks '1'
