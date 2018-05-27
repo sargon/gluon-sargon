@@ -10,15 +10,20 @@ PKG_SOURCE_VERSION:=ea4f46c348ac3fef59472900c81289f0d5cfcda2
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 
 PKG_BUILD_PARALLEL:=1
+PKG_INSTALL:=1
 
 TARGET_CFLAGS += -DLOG_LEVEL=20 
 
-include $(TOPDIR)/../package/gluon.mk
+include $(INCLUDE_DIR)/package.mk
 
 define Package/ddhcpd
   SECTION:=net
   CATEGORY:=Network
   TITLE:=ddhcpd
+endef
+
+define Package/ddhcpd/description
+ distributed dhcp server
 endef
 
 define Package/ddhcpd/install
