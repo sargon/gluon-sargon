@@ -36,6 +36,7 @@ start_service() {
   procd_append_param command -c "$dhcp_interface"
   procd_append_param command -i "$server_interface"
   procd_append_param command -N "$block_network"
+  procd_append_param command -H "/etc/ddhcpd.hook"
   procd_append_param command -o "51:4:0.0.1.44"
   [[ -f /lib/gluon/ddhcpd/arguments ]] && procd_append_param command $(/lib/gluon/ddhcpd/arguments)
   procd_set_param respawn
