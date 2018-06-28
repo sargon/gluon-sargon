@@ -14,7 +14,7 @@ PKG_INSTALL:=1
 
 TARGET_CFLAGS += -DLOG_LEVEL=20 
 
-include $(INCLUDE_DIR)/package.mk
+include $(TOPDIR)/../package/gluon.mk
 
 define Package/ddhcpd
   SECTION:=net
