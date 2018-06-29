@@ -25,6 +25,10 @@ define Package/ddhcpd/description
  distributed dhcp server
 endef
 
+define Build/Compile
+        CFLAGS="$(TARGET_CFLAGS)" BUILD_DIR="$(BUILD_DIR)" $(MAKE) -C $(PKG_BUILD_DIR) $(TARGET_CONFIGURE_OPTS)
+endef
+
 define Package/ddhcpd/install
 	$(CP) ./files/* $(1)
 	$(INSTALL_DIR) $(1)/usr/sbin/
