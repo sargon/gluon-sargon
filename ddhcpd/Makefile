@@ -27,9 +27,9 @@ endef
 
 define Package/ddhcpd/install
 	$(CP) ./files/* $(1)
-	mkdir -p $(1)/usr/sbin/
-	$(CP) $(PKG_BUILD_DIR)/ddhcpd  $(1)/usr/sbin/
-	$(CP) $(PKG_BUILD_DIR)/ddhcpdctl $(1)/usr/sbin/
+	$(INSTALL_DIR) $(1)/usr/sbin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/ddhcpd  $(1)/usr/sbin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/ddhcpdctl $(1)/usr/sbin/
 endef
 
 $(eval $(call BuildPackage,ddhcpd))
