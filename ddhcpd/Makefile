@@ -10,9 +10,8 @@ PKG_SOURCE_VERSION:=4f6c088a7032224535fd41090cc6a4c12673efbe
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 
 PKG_BUILD_PARALLEL:=1
-PKG_INSTALL:=1
 
-TARGET_CFLAGS += -DLOG_LEVEL=20 
+TARGET_CFLAGS += -DLOG_LEVEL=20
 
 include $(TOPDIR)/../package/gluon.mk
 
@@ -26,11 +25,15 @@ define Package/ddhcpd/description
  distributed dhcp server
 endef
 
+define Build/Compile
+        CFLAGS="$(TARGET_CFLAGS)" BUILD_DIR="$(BUILD_DIR)" $(MAKE) -C $(PKG_BUILD_DIR) $(TARGET_CONFIGURE_OPTS)
+endef
+
 define Package/ddhcpd/install
 	$(CP) ./files/* $(1)
-	mkdir -p $(1)/usr/sbin/
-	$(CP) $(PKG_BUILD_DIR)/ddhcpd  $(1)/usr/sbin/
-	$(CP) $(PKG_BUILD_DIR)/ddhcpdctl $(1)/usr/sbin/
+	$(INSTALL_DIR) $(1)/usr/sbin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/ddhcpd  $(1)/usr/sbin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/ddhcpdctl $(1)/usr/sbin/
 endef
 
 $(eval $(call BuildPackage,ddhcpd))
