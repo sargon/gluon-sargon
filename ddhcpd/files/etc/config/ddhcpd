@@ -8,7 +8,17 @@ config ddhcpd 'settings'
       option block_network '10.116.220.0/22'
       option dhcp_lease_time '300'
 
-config dhcp_option 'broadcast'
+config dhcp_option 'server_identify'
+     option code '54'
+     option len '4'
+     option payload '10.116.254.254'
+
+config dhcp_option 'netmask'
      option code '1'
      option len '4'
      option payload '255.255.128.0'
+
+config dhcp_option 'lease_time'
+     option code '51'
+     option len '4'
+     option payload '0.0.1.44'

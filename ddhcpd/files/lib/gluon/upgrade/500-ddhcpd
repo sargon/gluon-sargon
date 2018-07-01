@@ -1,0 +1,9 @@
+#!/usr/bin/lua
+local a=require'gluon.site'
+local e=require('simple-uci').cursor()
+e:section('ddhcpd','dhcp_option','server_identify',{
+option=54,
+len=4,
+payload=a.next_node.ipv4()
+})
+e:save('ddhcpd')
