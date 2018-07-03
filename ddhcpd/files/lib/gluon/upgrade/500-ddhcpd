@@ -15,7 +15,7 @@ cidr=math.max(0,cidr-8)
 end
 nm=nm..tostring(256-2^math.max(0,8-cidr))
 e:section('ddhcpd','dhcp_option','netmask',{
-code=51,
+code=1,
 len=4,
 payload=nm,
 })
