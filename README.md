@@ -5,4 +5,4 @@ Gluon packages from sargon
 A distributed dhcp server. This package adds the ddhcpd from https://github.com/sargon/ddhcpd
 
 ## roamguide
-Helps your client to search for a better AP and have a nice roam experience. see [Readme](roamguide/README)
+Helps your client to search for a better AP and have a nice roam experience. see [Readme](roamguide/README.md)
