@@ -2,7 +2,7 @@
 local a=require'gluon.site'
 local e=require('simple-uci').cursor()
 e:section('ddhcpd','dhcp_option','server_identify',{
-option=54,
+code=54,
 len=4,
 payload=a.next_node.ip4()
 })
@@ -15,7 +15,7 @@ cidr=math.max(0,cidr-8)
 end
 nm=nm..tostring(256-2^math.max(0,8-cidr))
 e:section('ddhcpd','dhcp_option','netmask',{
-option=51,
+code=51,
 len=4,
 payload=nm,
 })
