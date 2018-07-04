@@ -95,5 +95,7 @@ start_service() {
 
 service_triggers() {
   procd_add_config_trigger "config.change" "ddhcpd" /etc/init.d/ddhcpd restart
-  procd_add_interface_trigger "interface.*" "br-client" /etc/init.d/ddhcpd restart
+  procd_add_interface_trigger "interface.*" "$dhcp_interface" /etc/init.d/ddhcpd restart
+  [ "$dhcp_interface" == "$server_interface" ] || \
+      procd_add_interface_trigger "interface.*" "$server_interface" /etc/init.d/ddhcpd restart
 }
