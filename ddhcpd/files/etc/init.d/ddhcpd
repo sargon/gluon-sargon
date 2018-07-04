@@ -35,12 +35,12 @@ convert_leasetime() {
     [ "$suffix" == "m" ] && value="$(expr $value \* 60)"
 
     [ "$value" -gt 16581375 ] && {
-        l3="$(expr $value / 255)"
-        value="$(expr $value % 255)"
+        l3="$(expr $value / 16581375)"
+        value="$(expr $value % 16581375)"
     }
     [ "$value" -gt 65025 ] && {
-        l2=$(expr $value / 255)
-        value="$(expr $value % 255)"
+        l2=$(expr $value / 65025)
+        value="$(expr $value % 65025)"
     }
     [ "$value" -gt 255 ] && {
         l1=$(expr $value / 255)
