@@ -1,0 +1,10 @@
+#!/usr/bin/lua
+local site = require('gluon.site')
+local uci = require('simple-uci').cursor()
+if site.ddhcpd then
+  local enabled = site.ddhcpd.enabled() or '1'
+  uci:section('ddhcpd', 'settings', 'settings', {
+    enabled = uci:get('ddhcpd', 'settings', 'enabled') or enabled,
+    block_network = site.ddhcpd.network()
+  })
+end
