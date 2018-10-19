@@ -17,18 +17,18 @@ TARGET_CFLAGS += -DLOG_LEVEL=20
 include $(TOPDIR)/../package/gluon.mk
 
 define Package/ddhcpd
-  SECTION:=net
-  CATEGORY:=Network
-  TITLE:=ddhcpd
+	SECTION:=net
+	CATEGORY:=Network
+	TITLE:=ddhcpd
 endef
 
 define Package/ddhcpd/description
- distributed dhcp server
+	distributed dhcp server
 endef
 
 define Build/Compile
 	$(call Gluon/Build/Compile)
-        CFLAGS="$(TARGET_CFLAGS)" BUILD_DIR="$(BUILD_DIR)" $(MAKE) -C $(PKG_BUILD_DIR) $(TARGET_CONFIGURE_OPTS)
+	CFLAGS="$(TARGET_CFLAGS)" BUILD_DIR="$(BUILD_DIR)" $(MAKE) -C $(PKG_BUILD_DIR) $(TARGET_CONFIGURE_OPTS)
 endef
 
 define Package/ddhcpd/install
