@@ -5,7 +5,7 @@ if site.ddhcpd then
   local enabled = site.ddhcpd.enabled() or '1'
   uci:section('ddhcpd', 'settings', 'settings', {
     enabled = uci:get('ddhcpd', 'settings', 'enabled') or enabled,
-    block_network = site.ddhcpd.network()
+    block_network = site.ddhcpd.range()
   })
   uci:section('ddhcpd','dhcp_option','server_identify',{
     code=54,

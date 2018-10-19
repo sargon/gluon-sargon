@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ddhcpd
 PKG_VERSION:=2018-10-19
-PKG_RELEASE:=2
+PKG_RELEASE:=4
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/sargon/ddhcpd
@@ -27,11 +27,12 @@ define Package/ddhcpd/description
 endef
 
 define Build/Compile
+	$(call Gluon/Build/Compile)
         CFLAGS="$(TARGET_CFLAGS)" BUILD_DIR="$(BUILD_DIR)" $(MAKE) -C $(PKG_BUILD_DIR) $(TARGET_CONFIGURE_OPTS)
 endef
 
 define Package/ddhcpd/install
-	$(CP) ./files/* $(1)
+	$(call Gluon/Build/Install,$(1))
 	$(INSTALL_DIR) $(1)/usr/sbin/
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/ddhcpd  $(1)/usr/sbin/
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/ddhcpdctl $(1)/usr/sbin/
