@@ -14,7 +14,7 @@ validate_section_ddhcpd() {
   'block_size_pow:uinteger:2' \
   'block_timeout:uinteger:300' \
   'spare_blocks:uinteger:1' \
-  'timeout:uinteger:30' \
+  'tentative_timeout:uinteger:15' \
   'block_network:cidr4' \
   'dhcp_lease_time:uinteger:300'
 }
@@ -44,6 +44,7 @@ start_service() {
   procd_append_param command -c "$dhcp_interface"
   procd_append_param command -i "$server_interface"
   procd_append_param command -N "$block_network"
+  procd_append_param command -t "$tentative_timeout"
   procd_append_param command -H "/etc/ddhcpd.hook"
   config_foreach dhcp_option dhcp_option 
   [[ -f /lib/gluon/ddhcpd/arguments ]] && procd_append_param command $(/lib/gluon/ddhcpd/arguments)
