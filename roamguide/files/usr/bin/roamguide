@@ -4,8 +4,21 @@
 
 LOCK="/tmp/roamguide.lock"
 
+err(){
+  (>&2 echo "[${0}]" $@)
+}
+
 try_lock(){
-  mkdir "$LOCK" || echo "Already running!"
+  if [ -f "$LOCK" ]; then
+    pid="$(cat "$LOCK")"
+    if [ -e "/proc/${pid}" ]; then
+      err "Already running!"
+      exit 1
+    fi
+    err "Ignoring stale lockfile"
+  fi
+  rm -rf "$LOCK"
+  echo "$$" > "$LOCK"
   trap "rm $LOCK" EXIT
 }
 
