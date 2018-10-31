@@ -6,7 +6,7 @@ LOCK="/tmp/roamguide.lock"
 
 try_lock(){
   mkdir "$LOCK" || echo "Already running!"
-  trap "rm $LOCK" EXIT
+  trap "rmdir $LOCK" EXIT
 }
 
 wifi_kick(){
