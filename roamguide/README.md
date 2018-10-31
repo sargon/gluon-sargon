@@ -47,7 +47,8 @@ can add some more cron jobs with sleep timers in `/usr/lib/micron.d/roamguide`:
 #### make roamguide more reactive:
 
      ssh <router> 'grep -q "sleep 20" /usr/lib/micron.d/roamguide || echo -e "\n* * * * * sleep 20 & /usr/bin/roamguide" >> /usr/lib/micron.d/roamguide'
-     ssh <router> 'grep -q "sleep 40" /usr/lib/micron.d/roamguide || echo -e "\n* * * * * sleep 40 & /usr/bin/roamguide" >> /usr/lib/micron.d/roamguide'
+     ssh <router> 'grep -q "sleep 40" /usr/lib/micron.d/roamguide || echo -e "* * * * * sleep 40 & /usr/bin/roamguide" >> /usr/lib/micron.d/roamguide'
+     ssh <router> '/etc/init.d/micrond restart'
 
 #### configure different boundaries:
 
