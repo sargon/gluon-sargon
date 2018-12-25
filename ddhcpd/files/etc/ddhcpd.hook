@@ -1,7 +1,7 @@
 #!/bin/sh
 
+shopt -s nullglob
 for i in /etc/ddhcpd.d/*
 do
   $i "$@"
 done
-
