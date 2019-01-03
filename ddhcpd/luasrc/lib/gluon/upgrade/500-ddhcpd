@@ -2,6 +2,7 @@
 local site = require('gluon.site')
 local uci = require('simple-uci').cursor()
 if site.ddhcpd then
+  -- TODO: this seems to be true all the time
   local enabled = site.ddhcpd.enabled() or '1'
   uci:section('ddhcpd', 'settings', 'settings', {
     enabled = uci:get('ddhcpd', 'settings', 'enabled') or enabled,
