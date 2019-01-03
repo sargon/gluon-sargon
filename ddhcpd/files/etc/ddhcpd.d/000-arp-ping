@@ -2,6 +2,6 @@
 
 case "$1" in
   (lease): 
-    ping -c 1 -w 1 -I 10.116.254.254 "$2"
+    ping -c 1 -w 1 -I "$(uci get ddhcpd.server_identify.payload)" "$2"
   break;
 esac
