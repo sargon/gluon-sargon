@@ -75,7 +75,7 @@ client_macs() {
 client_tq() {
   local dev="$1"
   local mac="$2"
-  iw dev "${dev}" station get "${mac}" | grep "signal avg" | xargs | cut -d' ' -f 3
+  iw dev "${dev}" station get "${mac}" 2>/dev/null | grep "signal avg" | xargs | cut -d' ' -f 3
 }
 
 roamguide() {
