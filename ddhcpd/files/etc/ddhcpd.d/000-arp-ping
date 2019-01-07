@@ -1,7 +1,7 @@
 #!/bin/sh
 
 case "$1" in
-  (lease): 
+  (lease):
     ping -c 1 -w 1 -I 10.116.254.254 "$2"
   break;
 esac
