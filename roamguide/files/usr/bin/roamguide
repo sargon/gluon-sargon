@@ -19,7 +19,7 @@ try_lock(){
   fi
   rm -rf "$LOCK"
   echo "$$" > "$LOCK"
-  trap "rm $LOCK" EXIT
+  trap "rm -rf $LOCK" EXIT
 }
 
 wifi_kick(){
