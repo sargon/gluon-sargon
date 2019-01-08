@@ -16,7 +16,8 @@ validate_section_ddhcpd() {
   'spare_leases:uinteger:2' \
   'tentative_timeout:uinteger:15' \
   'block_network:cidr4' \
-  'dhcp_lease_time:uinteger:300'
+  'dhcp_lease_time:uinteger:300' \
+  'enabled:uinteger:1'
 }
 
 dhcp_option() {
@@ -36,6 +37,10 @@ start_service() {
   validate_section_ddhcpd || {
     echo "validation failed"
     return 1
+  }
+
+  [ "$enabled" -eq 0 ] && {
+    return 0
   }
 
   procd_append_param command -s "$spare_leases"
