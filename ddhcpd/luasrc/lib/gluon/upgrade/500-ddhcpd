@@ -2,7 +2,8 @@
 local site = require('gluon.site')
 local uci = require('simple-uci').cursor()
 if site.ddhcpd then
-  local enabled = site.ddhcpd.enabled() or '1'
+  local enabled = site.ddhcpd.enabled()
+  enabled = enabled == '0' and '0' or enabled and '1' or '0'
   uci:section('ddhcpd', 'settings', 'settings', {
     enabled = uci:get('ddhcpd', 'settings', 'enabled') or enabled,
     block_network = site.ddhcpd.range(),
