@@ -13,7 +13,7 @@ validate_section_ddhcpd() {
   'server_interface:string:br-client' \
   'block_size_pow:uinteger:2' \
   'block_timeout:uinteger:300' \
-  'spare_blocks:uinteger:1' \
+  'spare_leases:uinteger:2' \
   'tentative_timeout:uinteger:15' \
   'block_network:cidr4' \
   'dhcp_lease_time:uinteger:300'
@@ -38,7 +38,7 @@ start_service() {
     return 1
   }
 
-  procd_append_param command -s "$spare_blocks"
+  procd_append_param command -s "$spare_leases"
   procd_append_param command -b "$block_size_pow"
   procd_append_param command -B "$block_timeout"
   procd_append_param command -c "$dhcp_interface"
