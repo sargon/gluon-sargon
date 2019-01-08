@@ -1,7 +1,8 @@
 #!/bin/sh
 
-for i in /etc/ddhcpd.d/*
-do
-  $i "$@"
-done
-
+if [ "$(uci get ddhcpd.settings.enabled)" == 1 ]; then
+  for i in /etc/ddhcpd.d/*
+  do
+    $i "$@"
+  done
+fi

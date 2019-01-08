@@ -2,5 +2,6 @@
 
 . /lib/gluon/autoupdater/lib.sh
 
-
-start_enabled ddhcpd
+if [ "$(uci get ddhcpd.settings.enabled)" == 1 ]; then
+  start_enabled ddhcpd
+fi
