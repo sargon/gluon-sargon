@@ -40,7 +40,7 @@ update_gateway() {
 	/usr/sbin/ddhcpdctl -o "6:4:$1"
 }
 
-gwmac="`batctl gwl | grep '=>' | cut -d' ' -f2`"
+gwmac="`batctl gwl | sed 's/([[:space:]]*[0-9]\+)//g' | sed 's/[[:space:]]\+/ /g' | egrep '(^\*)|(=>)' | cut -d' ' -f2`"
 [ -z "$gwmac" ] && {
 	verbose Failed to determine mac address of current gateway
 	gateway_lost
