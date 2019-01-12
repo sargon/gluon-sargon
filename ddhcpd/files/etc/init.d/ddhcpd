@@ -30,7 +30,7 @@ dhcp_option() {
 
 start_service() {
   procd_open_instance
-  procd_set_param command $DAEMON -D 
+  procd_set_param command $DAEMON -D
 
   config_load "${NAME}"
 
@@ -51,7 +51,7 @@ start_service() {
   procd_append_param command -N "$block_network"
   procd_append_param command -t "$tentative_timeout"
   procd_append_param command -H "/etc/ddhcpd.hook"
-  config_foreach dhcp_option dhcp_option 
+  config_foreach dhcp_option dhcp_option
   [[ -f /lib/gluon/ddhcpd/arguments ]] && procd_append_param command $(/lib/gluon/ddhcpd/arguments)
   procd_set_param respawn
   procd_set_param netdev "$dhcp_interface"

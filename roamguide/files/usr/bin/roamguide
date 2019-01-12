@@ -69,7 +69,7 @@ count_cleanup() {
 
 client_macs() {
   local dev="$1"
-  iw dev "${dev}" station dump | grep Station | sed -e 's/^[^ ]\+ \([0-9a-z:]*\) .*/\1/' 
+  iw dev "${dev}" station dump | grep Station | sed -e 's/^[^ ]\+ \([0-9a-z:]*\) .*/\1/'
 }
 
 client_tq() {
@@ -109,7 +109,7 @@ roamlevel(){
       logger -s -t roamguide "${device}: ban ${mac} ${tq}dBm for ${bantime}ms"
       wifi_kick "${device}" "${mac}" "${bantime}"
       break # quits config_list_foreach
-    fi 
+    fi
   fi
   level=$(expr $level + 1)
 }
