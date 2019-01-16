@@ -6,18 +6,7 @@ config ddhcpd 'settings'
      option block_timeout '300'
      option tentative_timeout '15'
      option spare_leases '2'
-     option block_network '10.116.220.0/22'
      option dhcp_lease_time '300'
-
-config dhcp_option 'server_identify'
-     option code '54'
-     option len '4'
-     option payload '10.116.254.254'
-
-config dhcp_option 'netmask'
-     option code '1'
-     option len '4'
-     option payload '255.255.128.0'
 
 config dhcp_option 'lease_time'
      option code '51'
