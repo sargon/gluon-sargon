@@ -28,31 +28,31 @@ to deactivate it you need to set `enabled` to `0`.
        option bantime_base '500'      # on the first level ban for 500ms
        option bantime_factor '2375'   # on the second one for 2375ms,
                                       # the final is fixed at 10000ms
-       option forget_time '600'       # Forget about a client after 10s
+       option forget_time '600'       # Forget about a client after 10m
        option enabled '1'             # set to '0' to disable this profile
 
 This module creates a cronjob calling `/usr/bin/roamguide` once every minute.
 If you want to make roamguide more reactive (but also stress your device) you
 can add some more cron jobs with sleep timers in `/usr/lib/micron.d/roamguide`:
 
-    * * * * * sleep 20 & /usr/bin/roamguide
-    * * * * * sleep 40 & /usr/bin/roamguide
+    * * * * * sleep 20 && /usr/bin/roamguide
+    * * * * * sleep 40 && /usr/bin/roamguide
 
 ### Configure your node with ssh calls
 
 #### disable roamguide with one shell call:
 
-     ssh <router ip> 'uci set roamguide.@roamguide[0].enabled="0"; uci commit roamguide && echo done'
+     ssh $router_ip 'uci set roamguide.@roamguide[0].enabled="0"; uci commit roamguide && echo done'
 
 #### make roamguide more reactive:
 
-     ssh <router> 'grep -q "sleep 20" /usr/lib/micron.d/roamguide || echo -e "\n* * * * * sleep 20 & /usr/bin/roamguide" >> /usr/lib/micron.d/roamguide'
-     ssh <router> 'grep -q "sleep 40" /usr/lib/micron.d/roamguide || echo -e "* * * * * sleep 40 & /usr/bin/roamguide" >> /usr/lib/micron.d/roamguide'
-     ssh <router> '/etc/init.d/micrond restart'
+     ssh $router_ip 'grep -q "sleep 20" /usr/lib/micron.d/roamguide || echo -e "\n* * * * * sleep 20 && /usr/bin/roamguide" >> /usr/lib/micron.d/roamguide'
+     ssh $router_ip 'grep -q "sleep 40" /usr/lib/micron.d/roamguide || echo -e "* * * * * sleep 40 && /usr/bin/roamguide" >> /usr/lib/micron.d/roamguide'
+     ssh $router_ip '/etc/init.d/micrond restart'
 
 #### configure different boundaries:
 
-    ssh <router> 'uci set roamguide.@roamguide[0].signal='-60'; uci add_list roamguide.@roamguide[0].signal='-70'; uci add_list roamguide.@roamguide[0].signal='-80'; uci commit roamguide && echo done'
+    ssh $router_ip 'uci set roamguide.@roamguide[0].signal='-60'; uci add_list roamguide.@roamguide[0].signal='-70'; uci add_list roamguide.@roamguide[0].signal='-80'; uci commit roamguide && echo done'
 
 ## Testing tools
 
