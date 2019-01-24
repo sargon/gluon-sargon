@@ -8,6 +8,11 @@ add the package `ddhcpd` to your `site.mk` and add a section in your `site.conf`
     ddhcpd = {
       enabled = true,
       range = "10.187.124.0/22",
+      block_size = 2,
+      block_timeout = 300,
+      dhcp_lease_time = 300,
+      spare_leases = 2,
+      tentative_timeout = 15
     },
 
 Set enabled to `false` if you don't want DDHCPD to be enabled by default on your
