@@ -1,5 +1,4 @@
-ROAM-Guide
-----------
+# ROAM-Guide
 
 Helps your clients to search for a better AP and to have a nice roaming experience.
 
@@ -9,18 +8,17 @@ by stating that the AP is full, enabling the client to look for an alternative A
 
 This is happening in three definable stages depending on the TQ of the client.
 When a client has decided to come back after the ban-time it will not be bothered
-again unless it depletes to the next TQ level or it has been kicked $stage times.
+again unless it depletes to the next TQ level or it has been kicked `$stage` times.
 For every stage the client is guided, the ban time will be increased. So by default
 the first stage has a bantime of 500ms, the second 2775ms and the third 10000ms.
 
 When a client is away for some definable time or is below the first stages TQ,
-it will be forgotten, and the guiding will be re-enable.
+it will be forgotten, and the guiding will be re-enabled.
 
-Configuration
--------------
+## Configuration
 
-In '/etc/config/roamguide' the following default configuration is available,
-to activate it you need to set enabled to '1'.
+In `/etc/config/roamguide` the following default configuration is available,
+to deactivate it you need to set `enabled` to `0`.
 
     config roamguide
        option device "client0"        # wireless AP device we like to guide
@@ -28,29 +26,36 @@ to activate it you need to set enabled to '1'.
        list signal '-77'              # second penality level, in dBm
        list signal '-85'              # final penality level. in dBm
        option bantime_base '500'      # on the first level ban for 500ms
-       option bantime_factor '2375'   # on the second one for 2775ms,
-                                      # and in the final 10000ms
+       option bantime_factor '2375'   # on the second one for 2375ms,
+                                      # the final is fixed at 10000ms
        option forget_time '600'       # Forget about a client after 10s
-       option enabled '0'             # set to '1' to enable this profile
+       option enabled '1'             # set to '0' to disable this profile
 
-This module creates a cronjob calling /usr/bin/roamguide once a minute.
-If you want to make roamguide more reactive (but also stress your device) you can add some more cron jobs with sleep timers in /usr/lib/micron.d/root:
+This module creates a cronjob calling `/usr/bin/roamguide` once every minute.
+If you want to make roamguide more reactive (but also stress your device) you
+can add some more cron jobs with sleep timers in `/usr/lib/micron.d/roamguide`:
 
     * * * * * sleep 20 & /usr/bin/roamguide
     * * * * * sleep 40 & /usr/bin/roamguide
 
-If you want to disable this with one shell call you can use:
+### Configure your node with ssh calls
+
+#### disable roamguide with one shell call:
 
      ssh <router ip> 'uci set roamguide.@roamguide[0].enabled="0"; uci commit roamguide && echo done'
 
-If you want to make roamguide more reactive:
+#### make roamguide more reactive:
 
-     ssh <router> 'grep -q "sleep 20" /usr/lib/micron.d/root || echo "* * * * * sleep 20 & /usr/bin/roamguide" >> /usr/lib/micron.d/root'
-     ssh <router> 'grep -q "sleep 40" /usr/lib/micron.d/root || echo "* * * * * sleep 40 & /usr/bin/roamguide" >> /usr/lib/micron.d/root'
+     ssh <router> 'grep -q "sleep 20" /usr/lib/micron.d/roamguide || echo -e "\n* * * * * sleep 20 & /usr/bin/roamguide" >> /usr/lib/micron.d/roamguide'
+     ssh <router> 'grep -q "sleep 40" /usr/lib/micron.d/roamguide || echo -e "* * * * * sleep 40 & /usr/bin/roamguide" >> /usr/lib/micron.d/roamguide'
+     ssh <router> '/etc/init.d/micrond restart'
 
-### Testing tools
+#### configure different boundaries:
+
+    ssh <router> 'uci set roamguide.@roamguide[0].signal='-60'; uci add_list roamguide.@roamguide[0].signal='-70'; uci add_list roamguide.@roamguide[0].signal='-80'; uci commit roamguide && echo done'
+
+## Testing tools
 
 This will show you the stats, where you are connected to on your client:
 
     watch -d -n0,5 iw dev $(ip -o -4 route show to default | awk '{print $5}') station dump
-
