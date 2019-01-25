@@ -12,7 +12,7 @@ add the package `ddhcpd` to your `site.mk` and add a section in your `site.conf`
       block_timeout = 300,
       dhcp_lease_time = 300,
       spare_leases = 2,
-      tentative_timeout = 15
+      tentative_timeout = 15,
     },
 
 Set enabled to `false` if you don't want DDHCPD to be enabled by default on your
@@ -32,6 +32,9 @@ over DHCP via `respondd` from the chosen gateway.
 #### disable DDHCPD with one shell call:
 
      ssh <router ip> 'uci set ddhcpd.enabled="0"; uci commit ddhcpd && /etc/init.d/ddhcpd restart; echo done'
+
+All other values can be changed via `uci set` also, but all settings except
+`enabled` are reset to the default value set in your `site.conf` on reboot.
 
 ## More
 
