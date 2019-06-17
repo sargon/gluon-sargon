@@ -19,7 +19,7 @@ if site.ddhcpd then
     payload=site.next_node.ip4()
   })
   uci:delete('ddhcpd','broadcast')
-  cidr=tonumber(string.gsub(site:prefix4(),"[%w\.]+/(%d+)","%1"),10)
+  cidr=tonumber(string.gsub(site:prefix4(),"[%w.]+/(%d+)","%1"),10)
   netmask=''
   for i=1,3 do
     netmask=netmask..tostring(256-2^math.max(0,8-cidr))..'.'
