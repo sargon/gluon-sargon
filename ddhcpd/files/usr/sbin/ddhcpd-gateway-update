@@ -70,8 +70,8 @@ for _ in `seq "$GW_UPDATE_TRIES"`; do
 	gwaddr="`get_gw_ipv4_address "$gwmac"`"
 	[ -n "$gwaddr" ] && break
 done
-[ -z "$gwaddr" ] && {
-	verbose Failed to retrieve gateway IPv4 address
+[ -z "$gwaddr" ] && [ ! "$gwmac" == "$last_gwmac" ] && {
+	verbose Failed to retrieve new gateway IPv4 address
 	gateway_lost
 	exit 2
 }
