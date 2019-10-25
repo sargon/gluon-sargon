@@ -75,7 +75,7 @@ done
 	gateway_lost
 	exit 2
 }
-
+[ ! -z "$gwaddr" ] && {
 verbose Got gateway IPv4 address: "$gwaddr"
 
 echo "last_gwmac=\"$gwmac\"" > "$CACHE_FILE"
@@ -83,3 +83,6 @@ echo "last_gwaddr=\"$gwaddr\"" >> "$CACHE_FILE"
 echo "last_update_time=`date +'%s'`" >> "$CACHE_FILE"
 
 update_gateway "$gwaddr"
+} || {
+  verbose Information gathering failed, done nothing
+}
