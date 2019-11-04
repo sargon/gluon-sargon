@@ -9,7 +9,7 @@ include $(TOPDIR)/../package/gluon.mk
 define Package/ddhcpd-batman-adv
 	SECTION:=net
 	CATEGORY:=Network
-	DEPENDS:=+micrond ddhcpd
+	DEPENDS:=+micrond +ddhcpd
 	TITLE:=ddhcpd batman-adv integration
 endef
 
