@@ -3,16 +3,18 @@
 ## Integration of DDHCPD in gluon
 
 Add the feed https://github.com/sargon/gluon-sargon to your `modules` config,
-add the package `ddhcpd` to your `site.mk` and add a section in your `site.conf`:
+add the package `ddhcpd` (or `ddhcpd-batman-adv`) to your `site.mk` and add a
+section in your `site.conf`:
 
     ddhcpd = {
-      enabled = true,
-      range = "10.187.124.0/22",
-      block_size = 2,
-      block_timeout = 300,
-      dhcp_lease_time = 300,
-      spare_leases = 2,
-      tentative_timeout = 15,
+      range = "10.187.124.0/22",    -- Network to announce and manage blocks in
+                                    -- optional fine-tuning:
+      -- enabled = true,            -- (default: true)
+      -- block_size = 2,            -- Power over two of block size (default: 2)
+      -- block_timeout = 300,       -- Timeout in seconds until a claimed block is released (default: 300)
+      -- dhcp_lease_time = 300,     -- DHCP lease time in seconds (default: 300)
+      -- spare_leases = 2,          -- Amount of spare leases (max: 256, default: 2)
+      -- tentative_timeout = 15,    -- Time required for a block to be claimed (default: 15)
     },
 
 Set enabled to `false` if you don't want DDHCPD to be enabled by default on your
@@ -20,6 +22,10 @@ nodes.
 
 Choose a free IP-range that is not used by the DHCP-servers of your gateways
 that the DDHCPD can use to assign to clients.
+
+If you use B.A.T.M.A.N., continue reading the _Configuration_ section in 
+[ddhcpd-batman-adv README](ddhcpd-batman-adv/README.md#Configuration)
+
 
 #### disable DDHCPD with one shell call:
 
