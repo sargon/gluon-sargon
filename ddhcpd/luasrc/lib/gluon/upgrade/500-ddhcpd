@@ -6,7 +6,7 @@ if site.ddhcpd then
   enabled = enabled == '0' and '0' or enabled and '1' or '0'
   uci:section('ddhcpd', 'settings', 'settings', {
     enabled = uci:get('ddhcpd', 'settings', 'enabled') or enabled,
-    block_network = site.ddhcpd.range(),
+    block_network = site.ddhcpd.range() or 'range missing',
     block_size_pow = site.ddhcpd.block_size() or 2,
     block_timeout = site.ddhcpd.block_timeout() or 300,
     dhcp_lease_time = site.ddhcpd.dhcp_lease_time() or 300,
