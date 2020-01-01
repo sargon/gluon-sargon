@@ -24,7 +24,7 @@ Choose a free IP-range that is not used by the DHCP-servers of your gateways
 that the DDHCPD can use to assign to clients.
 
 If you use B.A.T.M.A.N., continue reading the _Configuration_ section in 
-[ddhcpd-batman-adv README](ddhcpd-batman-adv/README.md#Configuration)
+[ddhcpd-batman-adv README](../ddhcpd-batman-adv/README.md#Configuration)
 
 
 #### disable DDHCPD with one shell call:
