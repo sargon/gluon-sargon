@@ -14,7 +14,7 @@ section in your `site.conf`:
       -- block_timeout = 300,       -- Timeout in seconds until a claimed block is released (default: 300)
       -- dhcp_lease_time = 300,     -- DHCP lease time in seconds (default: 300)
       -- spare_leases = 2,          -- Amount of spare leases (max: 256, default: 2)
-      -- tentative_timeout = 15,    -- Time required for a block to be claimed (default: 15)
+      -- tentative_timeout = 15,    -- Time in seconds from when a block is announced to be claimed until a block is claimed (min:3, default: 15)
     },
 
 Set enabled to `false` if you don't want DDHCPD to be enabled by default on your
