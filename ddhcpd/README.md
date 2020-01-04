@@ -14,7 +14,7 @@ section in your `site.conf`:
       -- block_timeout = 300,       -- Timeout in seconds until a claimed block is released (default: 300)
       -- dhcp_lease_time = 300,     -- DHCP lease time in seconds (default: 300)
       -- spare_leases = 2,          -- Amount of spare leases (max: 256, default: 2)
-      -- tentative_timeout = 15,    -- Time required for a block to be claimed (default: 15)
+      -- tentative_timeout = 15,    -- Time in seconds from when a block is announced to be claimed until a block is claimed (min:3, default: 15)
     },
 
 Set enabled to `false` if you don't want DDHCPD to be enabled by default on your
@@ -24,7 +24,7 @@ Choose a free IP-range that is not used by the DHCP-servers of your gateways
 that the DDHCPD can use to assign to clients.
 
 If you use B.A.T.M.A.N., continue reading the _Configuration_ section in 
-[ddhcpd-batman-adv README](ddhcpd-batman-adv/README.md#Configuration)
+[ddhcpd-batman-adv README](../ddhcpd-batman-adv/README.md#Configuration)
 
 
 #### disable DDHCPD with one shell call:
