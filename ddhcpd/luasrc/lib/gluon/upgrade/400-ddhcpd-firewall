@@ -18,7 +18,7 @@ e:section('firewall','rule','mesh_d2d',{
 })
 e:section('firewall','rule','client_dhcp',{
   name='client_dhcp',
-  src='local_client',
+  src='loc_client',
   family='ipv4',
   dest_port='67',
   proto='udp',
