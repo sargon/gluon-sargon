@@ -2,7 +2,7 @@
 
 ## Integration of DDHCPD in gluon
 
-Add the feed https://github.com/sargon/gluon-sargon to your `modules` config,
+Add the feed https://github.com/sargon/gluon-sargon to your `modules` config (note: commit [0eeefb0](https://github.com/sargon/gluon-sargon/commit/0eeefb011748be0c4bb7446154cfbaa4af28094c) is only valid for builds from gluon v2021.1 on),
 add the package `ddhcpd` (or `ddhcpd-batman-adv`) to your `site.mk` and add a
 section in your `site.conf`:
 
